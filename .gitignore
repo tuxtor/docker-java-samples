@@ -1,3 +1,6 @@
 payara-demo/target
 quarkus-demo/target
 springboot-demo/target
+springboot-demo/.mvn
+quarkus-demo/.mvn
+payara-demo/.mvn
