@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/payara-demo/payara-demo.iml" filepath="$PROJECT_DIR$/payara-demo/payara-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/podman.iml" filepath="$PROJECT_DIR$/.idea/podman.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quarkus-demo/quarkus-demo.iml" filepath="$PROJECT_DIR$/quarkus-demo/quarkus-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-demo/springboot-demo.iml" filepath="$PROJECT_DIR$/springboot-demo/springboot-demo.iml" />
+    </modules>
+  </component>
+</project>

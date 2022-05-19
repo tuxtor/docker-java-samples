@@ -1,0 +1,11 @@
+@startuml
+
+component payara as "Payara Micro" {
+    artifact payarademo as "payara-demo.war"
+}
+
+database postgresql as "PostgreSQL 14"
+payara .. postgresql : "connection pool"
+
+@enduml
+

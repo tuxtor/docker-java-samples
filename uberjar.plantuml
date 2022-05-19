@@ -1,0 +1,15 @@
+@startuml
+
+
+component springbootdemo as "springboot-demo.jar" {
+    artifact tomcat
+    artifact spring
+    artifact pdriver as "postgresql"
+    artifact other as "..."
+}
+
+database postgresql as "PostgreSQL 14"
+springbootdemo .. postgresql : "connection pool"
+
+@enduml
+

@@ -1,0 +1,14 @@
+@startuml
+
+folder "quarkus-app" as quarkusapp {
+    folder lib
+    folder app
+    artifact quarkus as "quarkus-run.jar"
+}
+
+
+database postgresql as "PostgreSQL 14"
+quarkusapp .. postgresql : "connection pool"
+
+@enduml
+

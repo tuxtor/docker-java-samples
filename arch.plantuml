@@ -1,0 +1,14 @@
+@startuml
+
+component payara as "payara-demo"
+component quarkus as "quarkus-demo"
+component springboot as "springboot-demo"
+
+database postgresql as "PostgreSQL 14"
+
+payara .. postgresql
+quarkus .. postgresql
+springboot .. postgresql
+
+@enduml
+
