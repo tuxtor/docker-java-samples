@@ -1,26 +1,29 @@
 version: '3.8'
 services:
-  dbserver:
+  postgresql14:
     image: postgres:14
     restart: always
     environment:
       POSTGRES_PASSWORD: 'informatica'
-      POSTGRES_DB: postgres
+      POSTGRES_DB: 'postgres'
     volumes:
       - database-data:/var/lib/postgresql/data/
     ports:
-      - 5432
-  appserver:
-    image: payara/server-full:5.2022.2-jdk11
+      - "5432"
+  payara5:
+    image: tuxtor/payara-demo-micro:latest
     restart: always
     environment:
-      JVM_ARGS: -Xms1800m -Xmx1800m -XX:+UseG1GC -XX:+UseStringDeduplication
+      JVM_ARGS: '-Xms1800m -Xmx1800m -XX:+UseG1GC -XX:+UseStringDeduplication'
+      PAYARA_URL: 'jdbc:postgresql://postgresql14:5432/postgres'
+      PAYARA_DB_PASSWORD: 'informatica'
+      PAYARA_SERVER_HOST: 'postgresql14'
     volumes:
       - server-data:/opt/payara
     ports:
-      - 4848:4848
-      - 8080:8080
-      - 8181:8181
+      - "4848:4848"
+      - "8080:8080"
+      - "8181:8181"
     depends_on:
       - dbserver
 volumes:
