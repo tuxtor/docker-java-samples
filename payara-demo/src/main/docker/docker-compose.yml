@@ -18,14 +18,12 @@ services:
       PAYARA_URL: 'jdbc:postgresql://postgresql14:5432/postgres'
       PAYARA_DB_PASSWORD: 'informatica'
       PAYARA_SERVER_HOST: 'postgresql14'
-    volumes:
-      - server-data:/opt/payara
     ports:
       - "4848:4848"
       - "8080:8080"
       - "8181:8181"
     depends_on:
-      - dbserver
+      - postgresql14
 volumes:
   database-data:
   server-data:
