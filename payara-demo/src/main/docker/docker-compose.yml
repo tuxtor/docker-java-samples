@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  dbserver:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'informatica'
+      POSTGRES_DB: postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - 5432
+  appserver:
+    image: payara/server-full:5.2022.2-jdk11
+    restart: always
+    environment:
+      JVM_ARGS: -Xms1800m -Xmx1800m -XX:+UseG1GC -XX:+UseStringDeduplication
+    volumes:
+      - server-data:/opt/payara
+    ports:
+      - 4848:4848
+      - 8080:8080
+      - 8181:8181
+    depends_on:
+      - dbserver
+volumes:
+  database-data:
+  server-data:

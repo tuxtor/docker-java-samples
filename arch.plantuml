@@ -1,14 +1,35 @@
 @startuml
 
-component payara as "payara-demo"
-component quarkus as "quarkus-demo"
-component springboot as "springboot-demo"
+component payara as "Payara Application Server" {
+    artifact payarademo as "payara-demo.war"
+    artifact another as "other.war"
+    artifact extra as "....war"
+}
+
+folder "quarkus-app" as quarkusapp {
+    folder lib
+    folder app
+    artifact quarkus as "quarkus-run.jar"
+}
+
+component payaramicro as "Payara Micro" {
+    artifact payarademomicro as "payara-demo.war"
+}
+
+component springbootdemo as "springboot-demo.jar" {
+    artifact tomcat
+    artifact spring
+    artifact pdriver as "postgresql"
+    artifact other as "..."
+}
 
 database postgresql as "PostgreSQL 14"
 
-payara .. postgresql
-quarkus .. postgresql
-springboot .. postgresql
+payara .... postgresql : "connection pool"
+payaramicro .... postgresql : "connection pool"
+quarkusapp .... postgresql : "connection pool"
+springbootdemo .... postgresql : "connection pool"
+
 
 @enduml
 
