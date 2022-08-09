@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgresql14:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'informatica'
+      POSTGRES_DB: 'postgres'
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432"
+  quarkus:
+    image: tuxtor/quarkus-demo:latest
+    restart: always
+    environment:
+      JAVA_OPTS: '-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus-profile=docker'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: informatica
+      POSTGRES_URL: "jdbc:postgresql://postgresql14:5432/postgres"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql14
+volumes:
+  database-data:
