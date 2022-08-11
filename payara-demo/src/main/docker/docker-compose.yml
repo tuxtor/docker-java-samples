@@ -11,7 +11,7 @@ services:
     ports:
       - "5432"
   payara5:
-    image: tuxtor/payara-demo-micro:latest
+    image: tuxtor/payara-demo:1.0-SNAPSHOT
     restart: always
     environment:
       JVM_ARGS: '-Xms1800m -Xmx1800m -XX:+UseG1GC -XX:+UseStringDeduplication'
