@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version>
+		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vorozco</groupId>
@@ -14,7 +14,7 @@
 	<name>springboot-demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<repackage.classifier/>
 		<!--spring-native.version>0.11.5</spring-native.version-->
 	</properties>
@@ -34,8 +34,8 @@
 		</dependency-->
 
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -50,7 +50,7 @@
 			<plugin>
 				<groupId>org.eclipse.jkube</groupId>
 				<artifactId>kubernetes-maven-plugin</artifactId>
-				<version>1.8.0</version>
+				<version>1.16.2</version>
 				<configuration>
 					<generator>
 						<includes>
@@ -67,15 +67,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<classifier>${repackage.classifier}</classifier>
-					<image>
-						<builder>paketobuildpacks/builder:tiny</builder>
-						<env>
-							<BP_NATIVE_IMAGE>false</BP_NATIVE_IMAGE>
-						</env>
-					</image>
-				</configuration>
 			</plugin>
 			<!--plugin>
 				<groupId>org.springframework.experimental</groupId>

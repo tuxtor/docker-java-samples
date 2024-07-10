@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jdk
 VOLUME /tmp
 ARG EXTRACTED=/workspace/app/target/extracted
 ARG EXTRACTED=target/extracted

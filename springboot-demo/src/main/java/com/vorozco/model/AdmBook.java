@@ -1,6 +1,6 @@
 package com.vorozco.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Table(name = "adm_book")
 @Entity
