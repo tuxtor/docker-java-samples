@@ -16,6 +16,6 @@ public class HelloController {
         //Get local IP
         String ip = java.net.InetAddress.getLocalHost().getHostAddress();
 
-        return "Hola desde Spring Boot en " + ip;
+        return "Este es un hola para demostrar el cambio por capas " + ip;
     }
 }
