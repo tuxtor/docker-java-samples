@@ -10,7 +10,7 @@ metadata:
     jkube.menarini.com/tag: HEAD
   namespace: menarini
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: springboot-demo
@@ -35,6 +35,13 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512m
+            limits:
+              cpu: 500m
+              memory: 2048m
 ---
 apiVersion: v1
 kind: Service
@@ -57,3 +64,42 @@ spec:
     app: springboot-demo
     version: 0.0.5-SNAPSHOT
     matcherLabel: menariniLabel
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: springboot-demo
+  labels:
+    app: springboot-demo
+    provider: menarini
+    version: 0.0.5-SNAPSHOT
+  namespace: menarini
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: springboot-demo
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 90
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: springboot-demo
+  namespace: menarini
+  labels:
+    app: springboot-demo
+    provider: menarini
+    version: 0.0.5-SNAPSHOT
+    release: kube-prometheus-stack
+spec:
+  endpoints:
+    - port: http
+      path: /actuator/prometheus
+      interval: 5s
+  selector:
+    matchLabels:
+      app: springboot-demo
+      version: 0.0.5-SNAPSHOT
+      matcherLabel: menariniLabel
