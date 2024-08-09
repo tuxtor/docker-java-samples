@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-demo
+  labels:
+    app: springboot-demo
+    provider: menarini
+    version: 0.0.1-SNAPSHOT
+  annotations:
+    jkube.menarini.com/tag: HEAD
+  namespace: menarini
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springboot-demo
+      version: 0.0.1-SNAPSHOT
+      matcherLabel: menariniLabel
+  template:
+    metadata:
+      annotations:
+        jkube.menarini.com/tag: HEAD
+      labels:
+        app: springboot-demo
+        version: 0.0.1-SNAPSHOT
+        matcherLabel: menariniLabel
+      name: springboot-demo
+      namespace: menarini
+    spec:
+      containers:
+        - name: springboot-demo
+          image: tuxtor/springboot-demo:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-demo
+  labels:
+    app: springboot-demo
+    provider: menarini
+    version: 0.0.1-SNAPSHOT
+  annotations:
+    jkube.menarini.com/tag: HEAD
+  namespace: menarini
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: springboot-demo
+    version: 0.0.1-SNAPSHOT
+    matcherLabel: menariniLabel
