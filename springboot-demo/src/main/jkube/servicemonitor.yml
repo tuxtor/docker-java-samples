@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ${project.artifactId}
+spec:
+  endpoints:
+    - port: http
+      path: /actuator/prometheus
+      interval: 5s
+  selector:
+    matchLabels:
+      app: ${project.artifactId}

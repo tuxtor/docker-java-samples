@@ -15,7 +15,7 @@ public class HelloController {
     public String sayHello() throws UnknownHostException {
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -23,6 +23,6 @@ public class HelloController {
         //Get local IP
         String ip = java.net.InetAddress.getLocalHost().getHostAddress();
 
-        return "Este es un hola para demostrar el cambio por capas " + ip;
+        return "JKube es genial " + ip;
     }
 }

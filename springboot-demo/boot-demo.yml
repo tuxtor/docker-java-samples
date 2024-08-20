@@ -37,11 +37,27 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 200m
-              memory: 512m
+              cpu: "200m"
+              memory: "512Mi"
             limits:
-              cpu: 500m
-              memory: 2048m
+              cpu: "500m"
+              memory: "2048Mi"
+          readinessProbe:
+            failureThreshold: 2
+            successThreshold: 1
+            initialDelaySeconds: 180
+            httpGet:
+              port: 8080
+              scheme: HTTP
+              path: /actuator/health
+          livenessProbe:
+            failureThreshold: 3
+            successThreshold: 1
+            initialDelaySeconds: 180
+            httpGet:
+              port: 8080
+              scheme: HTTP
+              path: /actuator/health
 ---
 apiVersion: v1
 kind: Service
