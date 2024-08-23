@@ -1,0 +1,20 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: ${project.artifactId}
+spec:
+  filters:
+    - tag_normaliser: {}
+    - parser:
+        remove_key_name_field: true
+        parse:
+          type: json
+    - record_modifier:
+        records:
+          - app: "${project.artifactId}"
+  match:
+    - select:
+        labels:
+          app.kubernetes.io/name: ${project.artifactId}
+  localOutputRefs:
+    - es-output
