@@ -13,7 +13,7 @@ spec:
           readinessProbe:
             failureThreshold: 2
             successThreshold: 1
-            initialDelaySeconds: 240
+            initialDelaySeconds: 300
             httpGet:
               port: 8080
               scheme: HTTP
@@ -21,7 +21,7 @@ spec:
           livenessProbe:
             failureThreshold: 3
             successThreshold: 1
-            initialDelaySeconds: 240
+            initialDelaySeconds: 300
             httpGet:
               port: 8080
               scheme: HTTP
