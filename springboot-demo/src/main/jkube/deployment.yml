@@ -3,6 +3,9 @@ spec:
     spec:
       containers:
         - name: springboot-demo
+          env:
+          - name: "SPRING_PROFILES_ACTIVE"
+            value: "prod"
           resources:
             requests:
               cpu: "200m"

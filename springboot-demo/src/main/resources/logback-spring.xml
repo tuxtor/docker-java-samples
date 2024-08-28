@@ -7,11 +7,18 @@
         <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="jsonEncoder" />
-    </root>
+    <springProfile name="default">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
 
-    <logger name="com.vorozco">
-        <appender-ref ref="jsonEncoder"/>
-    </logger>
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="jsonEncoder" />
+        </root>
+        <logger name="com.vorozco">
+            <appender-ref ref="jsonEncoder"/>
+        </logger>
+    </springProfile>
 </configuration>
