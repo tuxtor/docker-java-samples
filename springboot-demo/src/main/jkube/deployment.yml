@@ -6,6 +6,8 @@ spec:
           env:
           - name: "SPRING_PROFILES_ACTIVE"
             value: "prod"
+          - name: "MANAGEMENT_OTLP_METRICS_EXPORT_URL"
+            value: "http://simplest-collector.menarini.svc.cluster.local:4318/v1/metrics"
           resources:
             requests:
               cpu: "200m"
