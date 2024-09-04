@@ -1,0 +1,23 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+processors:
+
+exporters:
+  debug:
+
+service:
+  extensions: [zpages]
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: []
+      exporters: [debug]
+
+extensions:
+  zpages:
+    endpoint: "0.0.0.0:55679"
