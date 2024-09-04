@@ -9,6 +9,8 @@ processors:
 
 exporters:
   debug:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
 
 service:
   extensions: [zpages]
@@ -16,7 +18,7 @@ service:
     metrics:
       receivers: [otlp]
       processors: []
-      exporters: [debug]
+      exporters: [debug,prometheus]
 
 extensions:
   zpages:
