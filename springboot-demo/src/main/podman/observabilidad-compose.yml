@@ -26,6 +26,11 @@ services:
       - ./grafana.yml:/etc/grafana/provisioning/datasources/default.yml
     ports:
       - "3000:3000"
-
-
 # zipkin
+  zipkin:
+    container_name: zipkin
+    image: ghcr.io/openzipkin/zipkin-slim:${TAG:-latest}
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - "9411:9411"
