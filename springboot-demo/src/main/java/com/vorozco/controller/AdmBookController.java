@@ -2,14 +2,20 @@ package com.vorozco.controller;
 
 import com.vorozco.model.AdmBook;
 import com.vorozco.repository.AdmBookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/books")
 public class AdmBookController {
     private AdmBookRepository admBookRepository;
+
+    Logger logger = LoggerFactory.getLogger(AdmBookController.class);
 
     @Autowired
     public AdmBookController(AdmBookRepository admBookRepository) {
@@ -17,7 +23,11 @@ public class AdmBookController {
     }
 
     @GetMapping
-    public Iterable<AdmBook> getAll() {
+    public Iterable<AdmBook> getAll(@RequestHeader Map<String, String> headers) {
+
+        headers.forEach( (k,v) ->
+            logger.info("Encabezado: " + k + " " + v));
+
         return admBookRepository.findAll();
     }
 
