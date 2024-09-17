@@ -4,6 +4,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
 helm repo add elastic https://helm.elastic.co
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm repo update
 
 helm upgrade --install --wait --timeout 15m --namespace monitoring --create-namespace kube-prometheus-stack prometheus-community/kube-prometheus-stack
@@ -21,5 +22,6 @@ helm upgrade --install --namespace monitoring opentelemetry-operator open-teleme
 --set admissionWebhooks.certManager.enabled=false \
 --set admissionWebhooks.autoGenerateCert.enabled=true
 
+helm upgrade --install --namespace monitoring jaeger jaegertracing/jaeger --values jaeger.yaml
 
 kubectl create namespace menarini

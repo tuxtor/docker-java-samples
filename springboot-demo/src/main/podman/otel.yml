@@ -43,7 +43,10 @@ spec:
       debug: {}
       prometheus:
         endpoint: "0.0.0.0:8889"
-
+      otlp:
+        endpoint: jaeger-collector.monitoring.svc.cluster.local:4317
+        tls:
+          insecure: true
     service:
       extensions: [zpages]
       pipelines:
@@ -54,7 +57,7 @@ spec:
         traces:
           receivers: [ otlp ]
           processors: [ memory_limiter, batch ]
-          exporters: [ debug ]
+          exporters: [ debug, otlp]
     extensions:
       zpages:
         endpoint: "0.0.0.0:55679"
