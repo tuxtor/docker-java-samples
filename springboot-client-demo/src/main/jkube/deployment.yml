@@ -3,10 +3,12 @@ spec:
     spec:
       containers:
         - env:
-          - name: "SPRING_PROFILES_ACTIVE"
-            value: "dev"
-          - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value: "http://simplest-collector.${jkube.namespace}.svc.cluster.local:4318"
+          - name: "MANAGEMENT_OTLP_TRACING_ENDPOINT"
+            value: "http://simplest-collector.${jkube.namespace}.svc.cluster.local:4318/v1/traces"
+          - name: "MANAGEMENT_OTLP_METRICS_EXPORT_URL"
+            value: "http://simplest-collector.${jkube.namespace}.svc.cluster.local:4318/v1/metrics"
+          - name: "SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_ADMBOOKCLIENT_URL"
+            value: "http://springboot-demo.${jkube.namespace}.svc.cluster.local:8080"
           resources:
             requests:
               cpu: "1000m"
