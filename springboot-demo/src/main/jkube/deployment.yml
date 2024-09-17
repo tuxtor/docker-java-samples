@@ -2,23 +2,22 @@ spec:
   template:
     spec:
       containers:
-        - name: springboot-demo
-          env:
+        - env:
           - name: "SPRING_PROFILES_ACTIVE"
-            value: "prod"
-          - name: "MANAGEMENT_OTLP_METRICS_EXPORT_URL"
-            value: "http://simplest-collector.menarini.svc.cluster.local:4318/v1/metrics"
+            value: "dev"
+          - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
+            value: "http://simplest-collector.menarini.svc.cluster.local:4318"
           resources:
             requests:
-              cpu: "200m"
-              memory: "512Mi"
+              cpu: "1000m"
+              memory: "1024Mi"
             limits:
-              cpu: "500m"
+              cpu: "1000m"
               memory: "2048Mi"
           readinessProbe:
             failureThreshold: 2
             successThreshold: 1
-            initialDelaySeconds: 300
+            initialDelaySeconds: 60
             httpGet:
               port: 8080
               scheme: HTTP
@@ -26,7 +25,7 @@ spec:
           livenessProbe:
             failureThreshold: 3
             successThreshold: 1
-            initialDelaySeconds: 300
+            initialDelaySeconds: 120
             httpGet:
               port: 8080
               scheme: HTTP

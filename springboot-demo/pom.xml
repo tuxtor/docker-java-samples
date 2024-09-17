@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.vorozco</groupId>
 	<artifactId>springboot-demo</artifactId>
-	<version>2.0.25-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<name>springboot-demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -90,7 +90,7 @@
 			<plugin>
 				<groupId>org.eclipse.jkube</groupId>
 				<artifactId>kubernetes-maven-plugin</artifactId>
-				<version>1.16.2</version>
+				<version>1.17.0</version>
 				<configuration>
 					<generator>
 						<includes>
