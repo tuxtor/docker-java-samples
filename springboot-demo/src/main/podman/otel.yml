@@ -1,25 +1,8 @@
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: otel-monitor
-  #namespace: menarini
-spec:
-  endpoints:
-    - interval: 5s
-      path: /metrics
-      targetPort: 8889
-  namespaceSelector:
-    matchNames:
-      - menarini
-  selector:
-    matchLabels:
-      "app.kubernetes.io/name": "simplest-collector"
----
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: simplest #will become simplest-collector.svc.menarini.local
-  #namespace: menarini
+  namespace: menarini
 spec:
   config:
     receivers:
@@ -41,7 +24,6 @@ spec:
     exporters:
       debug: {}
       prometheus:
-        endpoint: "0.0.0.0:8889"
 
     service:
       extensions: [zpages]
@@ -49,7 +31,7 @@ spec:
         metrics:
           receivers: [ otlp ]
           processors: [ batch ]
-          exporters: [ debug, prometheus ]
+          exporters: [ debug ]
         traces:
           receivers: [ otlp ]
           processors: [ memory_limiter, batch ]

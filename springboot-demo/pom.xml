@@ -17,7 +17,7 @@
 		<java.version>21</java.version>
 		<repackage.classifier/>
 		<!--spring-native.version>0.11.5</spring-native.version-->
-		<!--jkube.namespace>menarini</jkube.namespace-->
+		<jkube.namespace>menarini</jkube.namespace>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
