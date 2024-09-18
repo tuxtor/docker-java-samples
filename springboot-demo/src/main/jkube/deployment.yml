@@ -6,7 +6,7 @@ spec:
           - name: "SPRING_PROFILES_ACTIVE"
             value: "dev"
           - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value: "http://simplest-collector.${jkube.namespace}.svc.cluster.local:4318"
+            value: "http://simplest-collector.menarini.svc.cluster.local:4318"
           resources:
             requests:
               cpu: "1000m"
