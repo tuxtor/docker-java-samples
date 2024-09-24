@@ -1,0 +1,55 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: otel-monitor
+  namespace: menarini
+  labels:
+    release: kube-prometheus-stack #Really important
+spec:
+  endpoints:
+    - interval: 5s
+      path: /metrics
+      targetPort: 8889
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      "app.kubernetes.io/name": "simplest-collector"
+---
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: simplest #will become simplest-collector.svc.menarini.local
+  namespace: menarini
+spec:
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    processors:
+      batch:
+        timeout: 10s
+        send_batch_size: 5000
+    exporters:
+      debug: {}
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+      otlp:
+        endpoint: jaeger-collector.monitoring.svc.cluster.local:4317
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        metrics:
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ debug, prometheus ]
+        traces:
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ debug, otlp ]
+
