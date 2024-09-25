@@ -33,7 +33,7 @@ spec:
     processors:
       batch:
         timeout: 10s
-        send_batch_size: 5000
+        send_batch_size: 500
     exporters:
       debug: {}
       prometheus:
@@ -42,14 +42,20 @@ spec:
         endpoint: jaeger-collector.monitoring.svc.cluster.local:4317
         tls:
           insecure: true
+      signalfx:
+        access_token: ''
+        realm: us1
+        timeout: 5s
+        max_idle_conns: 80
+        log_data_points: true
     service:
       pipelines:
         metrics:
           receivers: [ otlp ]
           processors: [ batch ]
-          exporters: [ debug, prometheus ]
+          exporters: [ debug, prometheus, signalfx ]
         traces:
           receivers: [ otlp ]
           processors: [ batch ]
-          exporters: [ debug, otlp ]
+          exporters: [ debug, otlp, signalfx ]
 
