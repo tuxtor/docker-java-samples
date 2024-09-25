@@ -7,7 +7,7 @@ spec:
             value: "http://simplest-collector.menarini.svc.cluster.local:4318/v1/traces"
           - name: "MANAGEMENT_OTLP_METRICS_EXPORT_URL"
             value: "http://simplest-collector.menarini.svc.cluster.local:4318/v1/metrics"
-          - name: "SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_ADMBOOKCLIENT_URL"
+          - name: "SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_BOOKS_URL"
             value: "http://springboot-demo.menarini.svc.cluster.local:8080"
           resources:
             requests:
@@ -19,7 +19,7 @@ spec:
           readinessProbe:
             failureThreshold: 2
             successThreshold: 1
-            initialDelaySeconds: 150
+            initialDelaySeconds: 60
             httpGet:
               port: 8080
               scheme: HTTP
@@ -27,7 +27,7 @@ spec:
           livenessProbe:
             failureThreshold: 3
             successThreshold: 1
-            initialDelaySeconds: 150
+            initialDelaySeconds: 60
             httpGet:
               port: 8080
               scheme: HTTP

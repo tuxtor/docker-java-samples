@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
 
-@FeignClient(value="books", url="http://localhost:8080/books")
+@FeignClient(value="books", url="http://springboot-demo:8080/books")
 public interface AdmBookClient {
     
     @GetMapping
