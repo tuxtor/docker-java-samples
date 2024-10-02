@@ -20,12 +20,23 @@ services:
       - "9091:9090"
 # grafana
   grafana:
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     container_name: grafana
     image: grafana/grafana
     volumes:
       - ./grafana.yml:/etc/grafana/provisioning/datasources/default.yml
     ports:
       - "3000:3000"
+#loki
+  loki:
+    image: grafana/loki:3.2.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    #volumes:
+    #  - ./loki-local-config.yaml:/etc/grafana/provisioning/datasources/default.yml
 # zipkin
   zipkin:
     container_name: zipkin

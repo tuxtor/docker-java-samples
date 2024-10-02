@@ -14,7 +14,8 @@ exporters:
   zipkin:
     endpoint: "http://zipkin:9411/api/v2/spans"
     format: proto
-
+  otlphttp:
+    endpoint: http://loki:3100/otlp
 service:
   extensions: [zpages]
   pipelines:
@@ -25,6 +26,9 @@ service:
     traces:
       receivers: [otlp]
       exporters: [debug, zipkin]
+    logs:
+      receivers: [otlp]
+      exporters: [debug, otlphttp]
 extensions:
   zpages:
     endpoint: "0.0.0.0:55679"
